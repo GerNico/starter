@@ -12,16 +12,16 @@ import java.util.logging.Logger;
  */
 public class ServiceWithDependencyImpl implements ServiceWithDependency {
     private final DummyService dummyService;
-    private final Logger logger;
+    private final HelperClass helper;
 
-    public ServiceWithDependencyImpl(DummyService dummyService, Logger logger) {
+    public ServiceWithDependencyImpl(DummyService dummyService, HelperClass helper) {
         this.dummyService = dummyService;
-        this.logger = logger;
+        this.helper = helper;
     }
 
     @Override
     public SomeDTO doThisAndLog(String s) {
-        logger.info("we are doing this " + s);
-        return dummyService.doThis(s);
+        final String newS = helper.doSomething(s);
+        return dummyService.doThis(newS);
     }
 }

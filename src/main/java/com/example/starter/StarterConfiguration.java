@@ -1,14 +1,9 @@
 package com.example.starter;
 
-import com.example.starter.service.DummyService;
-import com.example.starter.service.DummyServiceImpl;
-import com.example.starter.service.ServiceWithDependency;
-import com.example.starter.service.ServiceWithDependencyImpl;
+import com.example.starter.service.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.logging.Logger;
 
 /**
  * Class StarterConfiguration that responsible for
@@ -21,13 +16,13 @@ public class StarterConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public DummyService testBean() {
+    public DummyService dummyService() {
         return new DummyServiceImpl();
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public ServiceWithDependency testBean(Logger logger, DummyService dummyService) {
-        return new ServiceWithDependencyImpl(dummyService, logger);
+    public ServiceWithDependency serviceWithDependency(HelperClass helperClass, DummyService dummyService) {
+        return new ServiceWithDependencyImpl(dummyService, helperClass);
     }
 }
