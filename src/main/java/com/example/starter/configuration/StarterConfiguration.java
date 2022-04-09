@@ -1,7 +1,10 @@
-package com.example.starter;
+package com.example.starter.configuration;
 
 import com.example.starter.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +15,11 @@ import org.springframework.context.annotation.Configuration;
  * @since 5.5
  */
 @Configuration
+@ConditionalOnProperty(prefix = "my.custom", name = "use-default")
+@EnableConfigurationProperties(StarterProperties.class)
 public class StarterConfiguration {
+    @Autowired
+    private StarterProperties properties;
 
     @Bean
     @ConditionalOnMissingBean
