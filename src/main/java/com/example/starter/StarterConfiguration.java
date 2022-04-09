@@ -1,5 +1,7 @@
 package com.example.starter;
 
+import com.example.starter.service.DummyService;
+import com.example.starter.service.DummyServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +17,7 @@ public class StarterConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public String testBean() {
-        return "I am here";
+    public DummyService testBean() {
+        return new DummyServiceImpl();
     }
 }
